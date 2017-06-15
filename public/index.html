@@ -1,0 +1,53 @@
+<!doctype html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Infinit Scroll</title>
+
+    <!-- Angular min -->
+    <script src="//code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="/lib/angular/1.6.2/angular.min.js"></script>
+    <script src="/lib/angular/1.6.2/angular-resource.min.js"></script>
+    <script src="/lib/angular/1.6.2/angular-sanitize.min.js"></script>
+
+    <!-- application -->
+    <script src="js/infinite-scroll.js"></script>
+
+    <!-- css -->
+    <link rel="stylesheet" href="/lib/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<!-- set controller -->
+
+<body ng-app="kuInfiniteScroll" strict-di>
+    <div ng-controller="mainController as ctrl">
+        <div class="container">
+            <h3>We have <b>{{ params.length }}</b> params.</h3>
+
+            <!-- title area -->
+            <div class="row">
+                <div class="col col-xs-3 col-md-3">Index</div>
+                <div class="col col-xs-3 col-md-3">DateTime</div>
+                <div class="col col-xs-6 col-md-6">Description</div>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- list area -->
+        <div class="container" infinite-scroll="ctrl.loadMore()">
+            <div class="row" ng-repeat="param in ctrl.params">
+                <div class="col-xs-3">{{ $index }}</div>
+                <div class="col-xs-3">{{ param.timestamp | date }}</div>
+                <div class="col-xs-6">{{ param.description }}</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
